@@ -68,7 +68,7 @@ class BM25Retriever(BaseRetriever):
                           disable=not self.is_main_process):
             query = self.test_corpus[idx]
             scores = self.bm25.get_scores(query)
-            near_ids = list(np.argsort(scores)[::-1][:self.ice_num])
+            near_ids = list(np.argsort(scores)[::-1][1:self.ice_num+1])
             near_ids = [int(a) for a in near_ids]
             rtr_idx_list.append(near_ids)
         return rtr_idx_list

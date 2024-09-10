@@ -39,7 +39,7 @@ with read_base():
     from ..gsm8k.gsm8k_gen_1d7fe4 import gsm8k_datasets
     from ..summedits.summedits_gen_315438 import summedits_datasets
     from ..math.math_gen_265cce import math_datasets
-    from ..TheoremQA.TheoremQA_gen_7009de import TheoremQA_datasets
+    # from ..TheoremQA.TheoremQA_gen_7009de import TheoremQA_datasets
     from ..hellaswag.hellaswag_gen_6faab5 import hellaswag_datasets
     from ..ARC_e.ARC_e_gen_1e0de5 import ARC_e_datasets
     from ..ARC_c.ARC_c_gen_1e0de5 import ARC_c_datasets

@@ -9,7 +9,7 @@ from datasets import Dataset
 from opencompass.registry import ICL_EVALUATORS
 
 from .icl_base_evaluator import BaseEvaluator
-
+from collections import Counter
 
 class HuggingfaceEvaluator(BaseEvaluator):
     """Use huggingface evaluate module to calculate the target metrics.
@@ -367,4 +367,70 @@ class AccwithDetailsEvaluator(BaseEvaluator):
 
         results = {'accuracy': correct / total * 100, 'details': details}
 
+        return results
+
+@ICL_EVALUATORS.register_module()
+class MultiInferenceConsistencyEvaluator(BaseEvaluator):
+    """Evaluator for multiple inferences and consistency calculation."""
+
+    def __init__(self, num_inferences: int = 10):
+        super().__init__()
+        self.num_inferences = num_inferences
+
+    def score(self, predictions: List[List[str]], references: List[str]) -> dict:
+        if len(predictions) != len(references):
+            return {
+                'error': 'predictions and references have different length. '
+                f'len(predictions): {len(predictions)}, '
+                f'len(references): {len(references)}'
+            }
+
+        total_correct = 0
+        total_consistency = 0
+        details = {}
+
+        for i, (pred_group, ref) in enumerate(zip(predictions, references)):
+            if len(pred_group) != self.num_inferences:
+                return {
+                    'error': f'Expected {self.num_inferences} predictions per sample, '
+                    f'but got {len(pred_group)} for sample {i}.'
+                }
+
+            pred_counter = Counter(pred_group)
+            most_common_pred, most_common_count = pred_counter.most_common(1)[0]
+            consistency = most_common_count / self.num_inferences
+
+            is_correct = (most_common_pred == ref)
+            total_correct += is_correct
+            total_consistency += consistency
+
+            details[str(i)] = {
+                'predictions': pred_group,
+                'reference': ref,
+                'most_common_prediction': most_common_pred,
+                'consistency': consistency,
+                'is_correct': is_correct,
+            }
+
+        accuracy = (total_correct / len(references)) * 100
+        avg_consistency = (total_consistency / len(references)) * 100
+
+        return {
+            'accuracy': accuracy,
+            'average_consistency': avg_consistency,
+            'details': details
+        }
+    
+
+class NLGEvaluator(BaseEvaluator):
+    def score(self, predictions, references):
+        results = []
+        for pred, ref in zip(predictions, references):
+            result = {
+                'prediction': pred,
+                'correct_answer': ref['correct_answer'],
+                'incorrect_answers': ref['incorrect_answers'],
+                'gold': ref['answerKey']
+            }
+            results.append(result)
         return results

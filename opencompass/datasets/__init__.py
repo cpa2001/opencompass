@@ -111,7 +111,7 @@ from .svamp import *  # noqa: F401, F403
 from .tabmwp import *  # noqa: F401, F403
 from .taco import *  # noqa: F401, F403
 from .teval import *  # noqa: F401, F403
-from .TheoremQA import *  # noqa: F401, F403
+# from .TheoremQA import *  # noqa: F401, F403
 from .tnews import *  # noqa: F401, F403
 from .triviaqa import *  # noqa: F401, F403
 from .triviaqarc import *  # noqa: F401, F403
@@ -127,3 +127,10 @@ from .xcopa import *  # noqa: F401, F403
 from .xiezhi import XiezhiDataset, XiezhiRetriever  # noqa: F401, F403
 from .xlsum import *  # noqa: F401, F403
 from .xsum import *  # noqa: F401, F403
+
+from .cantonese_truthfulqa import *  # noqa: F401, F403
+from .Optical import *
+from .cantonese_translation import *   # noqa: F401, F403
+from .cantonese_clean import *   # noqa: F401, F403
+from .wmt19 import * # noqa: F401, F403
+from .gsm8k_translator import * # noqa: F401, F403

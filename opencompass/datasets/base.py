@@ -18,10 +18,12 @@ class BaseDataset:
     @property
     def train(self):
         return self.reader.dataset['train']
+        # return self.reader.dataset
 
     @property
     def test(self):
         return self.reader.dataset['test']
+        # return self.reader.dataset
 
     @abstractstaticmethod
     def load(**kwargs) -> Union[Dataset, DatasetDict]:

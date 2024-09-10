@@ -25,28 +25,6 @@ logger = get_logger(__name__)
 
 @ICL_INFERENCERS.register_module()
 class GenInferencer(BaseInferencer):
-    """Generation Inferencer class to directly evaluate by generation.
-
-    Attributes:
-        model (:obj:`BaseModelWrapper`, optional): The module to inference.
-        max_seq_len (:obj:`int`, optional): Maximum number of tokenized words
-            allowed by the LM.
-        min_out_len (:obj:`int`, optional): Minimum number of generated tokens
-            by the LM
-        batch_size (:obj:`int`, optional): Batch size for the
-            :obj:`DataLoader`.
-        output_json_filepath (:obj:`str`, optional): File path for output
-            `JSON` file.
-        output_json_filename (:obj:`str`, optional): File name for output
-            `JSON` file.
-        gen_field_replace_token (:obj:`str`, optional): Used to replace the
-            generation field token when generating prompts.
-        save_every (:obj:`int`, optional): Save intermediate results every
-            `save_every` iters. Defaults to 1.
-        generation_kwargs (:obj:`Dict`, optional): Parameters for the
-            :obj:`model.generate()` method.
-    """
-
     def __init__(
             self,
             model: BaseModel,
@@ -59,6 +37,8 @@ class GenInferencer(BaseInferencer):
             output_json_filepath: Optional[str] = './icl_inference_output',
             output_json_filename: Optional[str] = 'predictions',
             save_every: Optional[int] = 1,
+            num_inferences: int = 1,  # for multiple inferences
+            dump_timer: bool = False,
             **kwargs) -> None:
         super().__init__(
             model=model,
@@ -73,7 +53,8 @@ class GenInferencer(BaseInferencer):
         self.max_out_len = max_out_len
         self.min_out_len = min_out_len
         self.stopping_criteria = stopping_criteria
-        self.dump_timer = kwargs.get('dump_timer', False)
+        self.num_inferences = num_inferences
+        self.dump_timer = dump_timer
 
         if self.model.is_api and save_every is None:
             save_every = 1
@@ -140,6 +121,7 @@ class GenInferencer(BaseInferencer):
             else:
                 entry = datum
                 golds = [None for _ in range(len(entry))]
+            
             # 5-1. Inference with local model
             extra_gen_kwargs = {}
             sig = inspect.signature(self.model.generate)
@@ -147,25 +129,24 @@ class GenInferencer(BaseInferencer):
                 extra_gen_kwargs['stopping_criteria'] = self.stopping_criteria
             if 'min_out_len' in sig.parameters:
                 extra_gen_kwargs['min_out_len'] = self.min_out_len
+            
             with torch.no_grad():
                 parsed_entries = self.model.parse_template(entry, mode='gen')
-                results = self.model.generate_from_template(
-                    entry, max_out_len=self.max_out_len, **extra_gen_kwargs)
-                generated = results
+                all_results = []
+                for _ in range(self.num_inferences):
+                    results = self.model.generate_from_template(
+                        entry, max_out_len=self.max_out_len, **extra_gen_kwargs)
+                    all_results.append(results)
+                generated = list(zip(*all_results))  # Reorganize results
 
-            num_return_sequences = getattr(self.model, 'generation_kwargs',
-                                           {}).get('num_return_sequences', 1)
             # 5-3. Save current output
-            for prompt, prediction, gold in zip(
-                    parsed_entries, batched(generated, num_return_sequences),
-                    golds):
-                if num_return_sequences == 1:
-                    prediction = prediction[0]
+            for prompt, predictions, gold in zip(parsed_entries, generated, golds):
                 output_handler.save_results(prompt,
-                                            prediction,
+                                            predictions,
                                             index,
                                             gold=gold)
                 index = index + 1
+
 
             # 5-4. Save intermediate results
             if (self.save_every is not None and index % self.save_every == 0

@@ -492,6 +492,8 @@ def parse_example_dataset(config):
 
 
 def make_custom_dataset_config(config):
+    if not isinstance(config, dict):
+        raise TypeError(f"Expected config to be a dictionary, but got {type(config)}")
     # considered as a custom dataset
     meta = parse_example_dataset(config)
     make_config_func = {
