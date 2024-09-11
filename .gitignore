@@ -133,6 +133,7 @@ turbomind/
 *.npy
 *.c
 *.out
+*.xlsx
 
 # aliyun
 core.*
