@@ -4,9 +4,9 @@ models = [
     dict(
         type=HuggingFaceBaseModel,
         abbr='qwen2-72b-hf',
-        path='/mnt/hwfile/optimal/chenpengan/qwen2-72b-instruct',
+        path='/cpfs01/shared/optimal/model/qwen2-72b-instruct',
         max_out_len=1024,
-        batch_size=8,
+        batch_size=16,
         run_cfg=dict(num_gpus=4),
         generation_kwargs=dict(
             do_sample=True,

@@ -1,5 +1,3 @@
-# File: gsm8k_translator.py
-
 import json
 from opencompass.registry import LOAD_DATASET
 from opencompass.datasets import GSM8KDataset

@@ -78,7 +78,7 @@ for src_lang, tgt_lang in language_pairs:
         dict(
             abbr=f'wmt19_{src_lang}-{tgt_lang}_0shot',
             type=WMT19TranslationDataset,
-            path='/mnt/hwfile/optimal/chenpengan/wmt19',
+            path='/cpfs01/user/chenpengan/root-2/data/wmt19',
             src_lang=src_lang,
             tgt_lang=tgt_lang,
             reader_cfg=wmt19_reader_cfg,
@@ -104,7 +104,7 @@ for src_lang, tgt_lang in language_pairs:
         dict(
             abbr=f'wmt19_{src_lang}-{tgt_lang}_5shot',
             type=WMT19TranslationDataset,
-            path='/mnt/hwfile/optimal/chenpengan/wmt19',
+            path='/cpfs01/user/chenpengan/root-2/data/wmt19',
             src_lang=src_lang,
             tgt_lang=tgt_lang,
             reader_cfg=wmt19_reader_cfg,

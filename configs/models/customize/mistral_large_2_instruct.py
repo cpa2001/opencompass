@@ -4,7 +4,7 @@ models = [
     dict(
         type=HuggingFacewithChatTemplate,
         abbr='mixtral-large-2-instruct-hf',
-        path='/mnt/hwfile/optimal/chenpengan/mistral-large-instruct-2407',
+        path='/cpfs01/shared/optimal/model/mistral-large-instruct-2407',
         max_out_len=1024,
         batch_size=8,
         run_cfg=dict(num_gpus=4),

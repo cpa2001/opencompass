@@ -4,9 +4,9 @@ models = [
     dict(
         type=HuggingFacewithChatTemplate,
         abbr='yi-1.5-34b-chat-hf',
-        path='/mnt/hwfile/optimal/chenpengan/yi-1_5-34b-chat',
+        path='/cpfs01/shared/optimal/model/yi-1_5-34b-chat',
         max_out_len=1024,
-        batch_size=32,
+        batch_size=8,
         run_cfg=dict(num_gpus=4),
         generation_kwargs=dict(
             do_sample=True,

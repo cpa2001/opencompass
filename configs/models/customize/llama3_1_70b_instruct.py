@@ -4,7 +4,7 @@ models = [
     dict(
         type=HuggingFacewithChatTemplate,
         abbr='llama-3_1-70b-instruct-hf',
-        path='/mnt/hwfile/optimal/chenpengan/llama3_1-70b-instruct',
+        path='/cpfs01/shared/optimal/model/llama3_1-70b-instruct',
         max_out_len=1024,
         batch_size=16,
         run_cfg=dict(num_gpus=4),
