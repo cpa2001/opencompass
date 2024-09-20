@@ -25,6 +25,7 @@ __pycache__/
 *$py.class
 *.ipynb
 batchscript*
+src
 
 # C extensions
 *.so

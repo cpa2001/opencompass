@@ -57,7 +57,7 @@ for dataset_name in ['exam_chinese', 'exam', 'hard_book', 'laser_safety', 'optic
         dict(
             abbr=f'{dataset_name}_0shot',
             type=OpticalDataset,
-            path=f'/mnt/petrelfs/chenpengan/opencompass/OpticalDataset/{dataset_name}_test.csv',
+            path=f'/cpfs01/user/chenpengan/root-2/opencompass/OpticalDataset/{dataset_name}_test.csv',
             reader_cfg=dict(
                 input_columns=['question', 'A', 'B', 'C', 'D'],
                 output_column='answer',
@@ -74,7 +74,7 @@ for dataset_name in ['exam_chinese', 'exam', 'hard_book', 'laser_safety', 'optic
         dict(
             abbr=f'{dataset_name}_5shot',
             type=OpticalDataset,
-            path=f'/mnt/petrelfs/chenpengan/opencompass/OpticalDataset/{dataset_name}_test.csv',
+            path=f'/cpfs01/user/chenpengan/root-2/opencompass/OpticalDataset/{dataset_name}_test.csv',
             reader_cfg=dict(
                 input_columns=['question', 'A', 'B', 'C', 'D'],
                 output_column='answer',

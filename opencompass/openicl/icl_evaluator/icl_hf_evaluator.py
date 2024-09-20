@@ -434,3 +434,8 @@ class NLGEvaluator(BaseEvaluator):
             }
             results.append(result)
         return results
+    
+
+
+# @ICL_EVALUATORS.register_module()
+# class OpticalEvaluator(BaseEvaluator):
