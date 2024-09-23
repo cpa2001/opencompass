@@ -7,7 +7,7 @@ from opencompass.tasks import OpenICLInferTask
 with read_base():
     from .datasets.collections.chat_medium import datasets
     from .summarizers.medium import summarizer
-    from .datasets.OpticalDataset.OpticalDatset_gen import optical_datasets
+    from .datasets.OpticalDataset.OpticalDataset_gen import optical_datasets
     from .datasets.truthfulqa.truthfulqa_gen_cantonese import truthfulqa_cantonese_datasets
     from .datasets.truthfulqa.truthfulqa_gen_english import truthfulqa_english_datasets
     from .datasets.gsm8k.gsm8k_gen_cantonese import gsm8k_cantonese_datasets

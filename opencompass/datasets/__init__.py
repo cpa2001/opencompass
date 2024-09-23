@@ -128,9 +128,11 @@ from .xiezhi import XiezhiDataset, XiezhiRetriever  # noqa: F401, F403
 from .xlsum import *  # noqa: F401, F403
 from .xsum import *  # noqa: F401, F403
 
+from opencompass.registry import LOAD_DATASET
 from .cantonese_truthfulqa import *  # noqa: F401, F403
-from .Optical import *
+from .Optical import *   # noqa: F401, F403
 from .cantonese_translation import *   # noqa: F401, F403
 from .cantonese_clean import *   # noqa: F401, F403
 from .wmt19 import * # noqa: F401, F403
 from .gsm8k_translator import * # noqa: F401, F403
+from .BioBenchmark import * # noqa: F401, F403

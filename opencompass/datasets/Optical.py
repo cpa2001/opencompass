@@ -2,7 +2,7 @@ import csv
 import json
 from datasets import Dataset, DatasetDict
 from opencompass.registry import LOAD_DATASET
-from .base import BaseDataset
+from opencompass.datasets.base import BaseDataset
 from collections import Counter
 
 @LOAD_DATASET.register_module()

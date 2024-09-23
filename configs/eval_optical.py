@@ -1,8 +1,8 @@
 from mmengine.config import read_base
-from opencompass.models import OpenAI
 
 with read_base():
-    from .datasets.OpticalDataset.OpticalDatset_gen import optical_datasets
+    from .datasets.OpticalDataset.OpticalDataset_gen import optical_datasets
+
 
     # 1GPU
     # from .models.customize.llama3_1_8b_instruct import models as hf_llama3_1_8b_instruct_model
@@ -30,6 +30,7 @@ with read_base():
     # from .models.customize.internlm2_5_20b_optical import models as hf_internlm2_5_20b_optical_model
     # from .models.customize.qwen2_5_72b_instruct_vllm import models as vllm_qwen2_5_72b_instruct_model
     from .models.customize.qwen2_5_72b_instruct_lmdeploy import models as lmdeploy_qwen2_5_72b_instruct_model
+    # from .models.customize.qwen2_5_72b_instruct import models as hf_qwen2_5_72b_instruct_model
     # 6GPU
     # from .models.customize.llama3_70b_instruct import models as hf_llama3_70b_instruct_model
     # from .models.customize.OpticalQwen2_72b import models as hf_OpticalQwen2_72b_model
@@ -46,7 +47,6 @@ with read_base():
 work_dir = 'outputs/Optical/'
 datasets = [*optical_datasets]
 
-# models = hf_llama3_8b_instruct_model
 models = sum([v for k, v in locals().items() if k.endswith('_model')], [])
 
 evaluation_config = dict(

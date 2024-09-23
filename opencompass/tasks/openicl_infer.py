@@ -15,6 +15,7 @@ from opencompass.tasks.base import BaseTask
 from opencompass.utils import (build_dataset_from_cfg, build_model_from_cfg,
                                get_infer_output_path, get_logger,
                                model_abbr_from_cfg, task_abbr_from_cfg)
+import opencompass.datasets
 
 
 @TASKS.register_module()
