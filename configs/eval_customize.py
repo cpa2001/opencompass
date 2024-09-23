@@ -85,9 +85,6 @@ work_dir = 'outputs/wmt19/'
 # datasets = [*gsm8k_chinese_datasets]
 datasets = [*wmt19_datasets]
 # datasets = [*gsm8k_translate_datasets]
-<<<<<<< Updated upstream
 # datasets= [*gsm8k_translate_train_datasets]
-=======
->>>>>>> Stashed changes
 # models = hf_llama3_8b_instruct_model
 models = sum([v for k, v in locals().items() if k.endswith('_model')], [])

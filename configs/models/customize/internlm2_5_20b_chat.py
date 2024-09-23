@@ -7,11 +7,7 @@ models = [
         path='/cpfs01/shared/optimal/model/internlm2_5-20b-chat',
         max_seq_len=4096,
         max_out_len=1024,
-<<<<<<< Updated upstream
         batch_size=16,
-=======
-        batch_size=8,
->>>>>>> Stashed changes
         run_cfg=dict(num_gpus=4),
         stop_words=['</s>', '<|im_end|>'],
         generation_kwargs=dict(
