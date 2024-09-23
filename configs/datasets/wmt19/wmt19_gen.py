@@ -67,6 +67,12 @@ language_pairs = [
     ('kk', 'en'), ('en', 'kk'),
     ('gu', 'en'), ('en', 'gu')
 ]
+language_pairs = [
+    ('en', 'cs'),
+    ('en', 'kk'),
+    ('en', 'gu')
+]
+
 
 wmt19_datasets = []
 
@@ -75,6 +81,7 @@ for src_lang, tgt_lang in language_pairs:
     tgt_lang_name = LANG_CODE_TO_NAME[tgt_lang]
     
     wmt19_datasets.extend([
+<<<<<<< Updated upstream
         dict(
             abbr=f'wmt19_{src_lang}-{tgt_lang}_0shot',
             type=WMT19TranslationDataset,
@@ -101,6 +108,34 @@ for src_lang, tgt_lang in language_pairs:
                 }
             },
             eval_cfg=wmt19_eval_cfg),
+=======
+        # dict(
+        #     abbr=f'wmt19_{src_lang}-{tgt_lang}_0shot',
+        #     type=WMT19TranslationDataset,
+        #     path='/mnt/hwfile/optimal/chenpengan/wmt19',
+        #     src_lang=src_lang,
+        #     tgt_lang=tgt_lang,
+        #     reader_cfg=wmt19_reader_cfg,
+        #     infer_cfg={
+        #         **wmt19_infer_cfg_0shot,
+        #         'prompt_template': {
+        #             **wmt19_infer_cfg_0shot['prompt_template'],
+        #             'template': {
+        #                 **wmt19_infer_cfg_0shot['prompt_template']['template'],
+        #                 'round': [
+        #                     {
+        #                         **wmt19_infer_cfg_0shot['prompt_template']['template']['round'][0],
+        #                         'prompt': wmt19_infer_cfg_0shot['prompt_template']['template']['round'][0]['prompt'].format(
+        #                             src_lang_name=src_lang_name, tgt_lang_name=tgt_lang_name
+        #                         )
+        #                     },
+        #                     wmt19_infer_cfg_0shot['prompt_template']['template']['round'][1]
+        #                 ]
+        #             }
+        #         }
+        #     },
+        #     eval_cfg=wmt19_eval_cfg),
+>>>>>>> Stashed changes
         dict(
             abbr=f'wmt19_{src_lang}-{tgt_lang}_5shot',
             type=WMT19TranslationDataset,
