@@ -77,7 +77,7 @@ for _name in cmmlu_yue_all_sets:
     cmmlu_yue_gen_datasets.append(
         dict(
             type=CMMLUDataset,
-            path='./cantonese_dataset/CMMLU_yue/',
+            path='/mnt/petrelfs/chenpengan/opencompass/cantonese_dataset/CMMLU_yue',
             name=_name,
             abbr=f'cmmlu-yue-{_name}-5shot',
             reader_cfg=dict(
@@ -93,7 +93,7 @@ for _name in cmmlu_yue_all_sets:
     cmmlu_yue_gen_datasets.append(
         dict(
             type=CMMLUDataset,
-            path='./cantonese_dataset/CMMLU_yue/',
+            path='/mnt/petrelfs/chenpengan/opencompass/cantonese_dataset/CMMLU_yue',
             name=_name,
             abbr=f'cmmlu-yue-{_name}-0shot',
             reader_cfg=dict(

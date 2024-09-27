@@ -1,10 +1,10 @@
-from opencompass.models import HuggingFacewithChatTemplate
+from opencompass.models import HuggingFaceBaseModel
 
 models = [
     dict(
-        type=HuggingFacewithChatTemplate,
-        abbr='qwen2-7b-instruct-hf',
-        path='/mnt/hwfile/optimal/chenpengan/qwen2-7b-instruct',
+        type=HuggingFaceBaseModel,
+        abbr='qwen2.5-7b-hf',
+        path='/mnt/hwfile/optimal/chenpengan/qwen2_5-7b',
         max_out_len=1024,
         batch_size=8,
         run_cfg=dict(num_gpus=1),
