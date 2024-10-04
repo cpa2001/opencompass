@@ -54,7 +54,7 @@ ARC_c_cantonese_datasets = [
     dict(
         abbr='ARC-c_0shot',
         type=ARCDataset,
-        path='/mnt/petrelfs/chenpengan/opencompass/cantonese_dataset/translated_ARC_challenge.jsonl',
+        path='/cpfs01/user/chenpengan/root-2/opencompass/cantonese_dataset/translated_ARC_challenge.jsonl',
         name='challenge',
         reader_cfg=ARC_c_reader_cfg,
         infer_cfg=ARC_c_infer_cfg_0shot,
@@ -63,7 +63,7 @@ ARC_c_cantonese_datasets = [
         dict(
         abbr='ARC-c_5shot',
         type=ARCDataset,
-        path='/mnt/petrelfs/chenpengan/opencompass/cantonese_dataset/translated_ARC_challenge.jsonl',
+        path='/cpfs01/user/chenpengan/root-2/opencompass/cantonese_dataset/translated_ARC_challenge.jsonl',
         name='challenge',
         reader_cfg=ARC_c_reader_cfg,
         infer_cfg=ARC_c_infer_cfg_5shot,

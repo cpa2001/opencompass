@@ -43,14 +43,14 @@ gsm8k_english_datasets = [
     dict(
         abbr='gsm8k_english_0shot',
         type=GSM8KDataset,
-        path='./data/gsm8k',
+        path='/cpfs01/user/chenpengan/root-2/opencompass/data/gsm8k',
         reader_cfg=gsm8k_reader_cfg,
         infer_cfg=gsm8k_infer_cfg_0shot,
         eval_cfg=gsm8k_eval_cfg_0shot),
     dict(
         abbr='gsm8k_english_5shot',
         type=GSM8KDataset,
-        path='./data/gsm8k',
+        path='/cpfs01/user/chenpengan/root-2/opencompass/data/gsm8k',
         reader_cfg=gsm8k_reader_cfg,
         infer_cfg=gsm8k_infer_cfg_5shot,
         eval_cfg=gsm8k_eval_cfg_5shot),        

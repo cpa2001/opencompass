@@ -86,7 +86,7 @@ truthfulqa_cantonese_datasets = [
     dict(
         abbr='truthful_qa_cantonese_0shot',
         type=TruthfulQACantoneseDataset,
-        path='/mnt/petrelfs/chenpengan/opencompass/cantonese_dataset/TruthfulQA_cantonese.json',
+        path='/cpfs01/user/chenpengan/root-2/opencompass/cantonese_dataset/TruthfulQA_cantonese.json',
         name='generation',
         reader_cfg=truthfulqa_reader_cfg,
         infer_cfg=truthfulqa_infer_cfg_0shot,
@@ -95,7 +95,7 @@ truthfulqa_cantonese_datasets = [
         dict(
         abbr='truthful_qa_cantonese_5shot',
         type=TruthfulQACantoneseDataset,
-        path='/mnt/petrelfs/chenpengan/opencompass/cantonese_dataset/TruthfulQA_cantonese.json',
+        path='/cpfs01/user/chenpengan/root-2/opencompass/cantonese_dataset/TruthfulQA_cantonese.json',
         name='generation',
         reader_cfg=truthfulqa_reader_cfg,
         infer_cfg=truthfulqa_infer_cfg_5shot,

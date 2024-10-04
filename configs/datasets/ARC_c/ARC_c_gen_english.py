@@ -54,7 +54,8 @@ ARC_c_english_datasets = [
     dict(
         abbr='ARC-c_0shot',
         type=ARCDataset,
-        path='./data/ARC/ARC-c/ARC-Challenge-Test.jsonl',
+        path='/cpfs01/user/chenpengan/root-2/opencompass/data/ARC/ARC-c/ARC-Challenge-Test.jsonl',
+        name='challenge',
         reader_cfg=ARC_c_reader_cfg,
         infer_cfg=ARC_c_infer_cfg_0shot,
         eval_cfg=ARC_c_eval_cfg_0shot,
@@ -62,7 +63,8 @@ ARC_c_english_datasets = [
         dict(
         abbr='ARC-c_5shot',
         type=ARCDataset,
-        path='./data/ARC/ARC-c/ARC-Challenge-Test.jsonl',
+        path='/cpfs01/user/chenpengan/root-2/opencompass/data/ARC/ARC-c/ARC-Challenge-Test.jsonl',
+        name='challenge',
         reader_cfg=ARC_c_reader_cfg,
         infer_cfg=ARC_c_infer_cfg_5shot,
         eval_cfg=ARC_c_eval_cfg_5shot,

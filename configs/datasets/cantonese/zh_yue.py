@@ -41,13 +41,13 @@ zh_yue_datasets = [
     dict(
         abbr='zh-yue_0shot',
         type=CantoneseTranslationDataset,
-        path='/mnt/petrelfs/chenpengan/opencompass/cantonese_dataset/zh-yue.json',
+        path='/cpfs01/user/chenpengan/root-2/opencompass/cantonese_dataset/zh-yue.json',
         reader_cfg=reader_cfg,
         infer_cfg=infer_cfg_0shot),
     dict(
         abbr='zh-yue_5shot',
         type=CantoneseTranslationDataset,
-        path='/mnt/petrelfs/chenpengan/opencompass/cantonese_dataset/zh-yue.json',
+        path='/cpfs01/user/chenpengan/root-2/opencompass/cantonese_dataset/zh-yue.json',
         reader_cfg=reader_cfg,
         infer_cfg=infer_cfg_5shot),
 ]

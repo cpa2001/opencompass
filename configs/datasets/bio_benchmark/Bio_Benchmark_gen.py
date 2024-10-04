@@ -252,6 +252,136 @@ bio_infer_cfgs_5shot = {
         retriever=dict(type=BM25Retriever, ice_num=5),
         inferencer=dict(type=GenInferencer),
     ),
+    'transformed_headqa': dict(
+        ice_template=dict(
+            type=PromptTemplate,
+            template='Example:\nMedical Question: {question}\nCorrect Answer: {answer}\n'
+        ),
+        prompt_template=dict(
+            type=PromptTemplate,
+            template="You are a leading expert in medical sciences. Carefully analyze the following multiple-choice question and provide the correct answer along with your reasoning.\n\n</E>\nMedical Question: {question}\n\nYour response should be structured as follows:\n\nAnalysis:\n1. [First key point or step in your reasoning]\n2. [Second key point or step]\n3. [Third key point or step]\n(Add more steps if necessary)\n\nFinal answer: [Your concise and accurate answer based on the analysis above]\n\nEnsure your analysis is thorough and your final answer is precise and directly addresses the question.",
+            ice_token='</E>',
+        ),
+        retriever=dict(type=BM25Retriever, ice_num=5),
+        inferencer=dict(type=GenInferencer),
+    ),
+    'transformed_medlfqa_healthqa': dict(
+        ice_template=dict(
+            type=PromptTemplate,
+            template='Example:\nHealth Question: {question}\nAnswer: {free_form_answer}\n'
+        ),
+        prompt_template=dict(
+            type=PromptTemplate,
+            template="You are a medical expert. Carefully analyze the following health-related question and provide a detailed answer.\n\n</E>\nHealth Question: {question}\n\nYour response should be structured as follows:\n\nAnalysis:\n1. [First key point or step in your reasoning]\n2. [Second key point or step]\n3. [Third key point or step]\n(Add more steps if necessary)\n\nFinal answer: [Your detailed answer based on the analysis above]\n\nEnsure your analysis is thorough and your final answer is comprehensive and directly addresses the question.",
+            ice_token='</E>',
+        ),
+        retriever=dict(type=BM25Retriever, ice_num=5),
+        inferencer=dict(type=GenInferencer),
+    ),
+    'transformed_medlfqa_kqa': dict(
+        ice_template=dict(
+            type=PromptTemplate,
+            template='Example:\nKnowledge Question: {question}\nAnswer: {free_form_answer}\n'
+        ),
+        prompt_template=dict(
+            type=PromptTemplate,
+            template="You are a medical expert. Carefully analyze the following knowledge-based question and provide a detailed answer.\n\n</E>\nKnowledge Question: {question}\n\nYour response should be structured as follows:\n\nAnalysis:\n1. [First key point or step in your reasoning]\n2. [Second key point or step]\n3. [Third key point or step]\n(Add more steps if necessary)\n\nFinal answer: [Your detailed answer based on the analysis above]\n\nEnsure your analysis is thorough and your final answer is comprehensive and directly addresses the question.",
+            ice_token='</E>',
+        ),
+        retriever=dict(type=BM25Retriever, ice_num=5),
+        inferencer=dict(type=GenInferencer),
+    ),
+    'transformed_medlfqa_liveqa': dict(
+        ice_template=dict(
+            type=PromptTemplate,
+            template='Example:\nLive QA Question: {question}\nAnswer: {free_form_answer}\n'
+        ),
+        prompt_template=dict(
+            type=PromptTemplate,
+            template="You are a medical expert. Carefully analyze the following live QA question and provide a comprehensive answer.\n\n</E>\nLive QA Question: {question}\n\nYour response should be structured as follows:\n\nAnalysis:\n1. [First key point or step in your reasoning]\n2. [Second key point or step]\n3. [Third key point or step]\n(Add more steps if necessary)\n\nFinal answer: [Your comprehensive answer based on the analysis above]\n\nEnsure your analysis is thorough and your final answer is detailed and directly addresses the question.",
+            ice_token='</E>',
+        ),
+        retriever=dict(type=BM25Retriever, ice_num=5),
+        inferencer=dict(type=GenInferencer),
+    ),
+    'transformed_medlfqa_medicationqa': dict(
+        ice_template=dict(
+            type=PromptTemplate,
+            template='Example:\nMedication Question: {question}\nAnswer: {free_form_answer}\n'
+        ),
+        prompt_template=dict(
+            type=PromptTemplate,
+            template="You are a medical expert. Carefully analyze the following question about medication and provide a detailed answer.\n\n</E>\nMedication Question: {question}\n\nYour response should be structured as follows:\n\nAnalysis:\n1. [First key point or step in your reasoning]\n2. [Second key point or step]\n3. [Third key point or step]\n(Add more steps if necessary)\n\nFinal answer: [Your detailed answer based on the analysis above]\n\nEnsure your analysis is thorough and your final answer is comprehensive and directly addresses the question.",
+            ice_token='</E>',
+        ),
+        retriever=dict(type=BM25Retriever, ice_num=5),
+        inferencer=dict(type=GenInferencer),
+    ),
+    'transformed_medmcqa': dict(
+        ice_template=dict(
+            type=PromptTemplate,
+            template='Example:\nMedical Question: {question}\nCorrect Answer: {answer}\n'
+        ),
+        prompt_template=dict(
+            type=PromptTemplate,
+            template="You are a leading expert in medical sciences. Carefully analyze the following multiple-choice question and provide the correct answer along with your reasoning.\n\n</E>\nMedical Question: {question}\n\nYour response should be structured as follows:\n\nAnalysis:\n1. [First key point or step in your reasoning]\n2. [Second key point or step]\n3. [Third key point or step]\n(Add more steps if necessary)\n\nFinal answer: [Your concise and accurate answer based on the analysis above]\n\nEnsure your analysis is thorough and your final answer is precise and directly addresses the question.",
+            ice_token='</E>',
+        ),
+        retriever=dict(type=BM25Retriever, ice_num=5),
+        inferencer=dict(type=GenInferencer),
+    ),
+    'transformed_medqa_cn': dict(
+        ice_template=dict(
+            type=PromptTemplate,
+            template='Example:\nMedical Question (CN): {question}\nCorrect Answer: {answer}\n'
+        ),
+        prompt_template=dict(
+            type=PromptTemplate,
+            template="You are a leading expert in Chinese medical sciences. Carefully analyze the following multiple-choice question and provide the correct answer along with your reasoning.\n\n</E>\nMedical Question (CN): {question}\n\nYour response should be structured as follows:\n\nAnalysis:\n1. [First key point or step in your reasoning]\n2. [Second key point or step]\n3. [Third key point or step]\n(Add more steps if necessary)\n\nFinal answer: [Your concise and accurate answer based on the analysis above]\n\nEnsure your analysis is thorough and your final answer is precise and directly addresses the question.",
+            ice_token='</E>',
+        ),
+        retriever=dict(type=BM25Retriever, ice_num=5),
+        inferencer=dict(type=GenInferencer),
+    ),
+    'transformed_medqa_tw': dict(
+        ice_template=dict(
+            type=PromptTemplate,
+            template='Example:\nMedical Question (TW): {question}\nCorrect Answer: {answer}\n'
+        ),
+        prompt_template=dict(
+            type=PromptTemplate,
+            template="You are a leading expert in Taiwanese medical sciences. Carefully analyze the following multiple-choice question and provide the correct answer along with your reasoning.\n\n</E>\nMedical Question (TW): {question}\n\nYour response should be structured as follows:\n\nAnalysis:\n1. [First key point or step in your reasoning]\n2. [Second key point or step]\n3. [Third key point or step]\n(Add more steps if necessary)\n\nFinal answer: [Your concise and accurate answer based on the analysis above]\n\nEnsure your analysis is thorough and your final answer is precise and directly addresses the question.",
+            ice_token='</E>',
+        ),
+        retriever=dict(type=BM25Retriever, ice_num=5),
+        inferencer=dict(type=GenInferencer),
+    ),
+    'transformed_medqa_us': dict(
+        ice_template=dict(
+            type=PromptTemplate,
+            template='Example:\nMedical Question (US): {question}\nCorrect Answer: {answer}\n'
+        ),
+        prompt_template=dict(
+            type=PromptTemplate,
+            template="You are a leading expert in US medical sciences. Carefully analyze the following multiple-choice question and provide the correct answer along with your reasoning.\n\n</E>\nMedical Question (US): {question}\n\nYour response should be structured as follows:\n\nAnalysis:\n1. [First key point or step in your reasoning]\n2. [Second key point or step]\n3. [Third key point or step]\n(Add more steps if necessary)\n\nFinal answer: [Your concise and accurate answer based on the analysis above]\n\nEnsure your analysis is thorough and your final answer is precise and directly addresses the question.",
+            ice_token='</E>',
+        ),
+        retriever=dict(type=BM25Retriever, ice_num=5),
+        inferencer=dict(type=GenInferencer),
+    ),
+    'transformed_mmcu': dict(
+        ice_template=dict(
+            type=PromptTemplate,
+            template='Example:\nMMCU Medical Question: {question}\nCorrect Answer: {answer}\n'
+        ),
+        prompt_template=dict(
+            type=PromptTemplate,
+            template="You are a leading expert in fundamental medical sciences. Carefully analyze the following multiple-choice question and provide the correct answer along with your reasoning.\n\n</E>\nMMCU Medical Question: {question}\n\nYour response should be structured as follows:\n\nAnalysis:\n1. [First key point or step in your reasoning]\n2. [Second key point or step]\n3. [Third key point or step]\n(Add more steps if necessary)\n\nFinal answer: [Your concise and accurate answer based on the analysis above]\n\nEnsure your analysis is thorough and your final answer is precise and directly addresses the question.",
+            ice_token='</E>',
+        ),
+        retriever=dict(type=BM25Retriever, ice_num=5),
+        inferencer=dict(type=GenInferencer),
+    ),
 }
 
 no_few_shot_datasets = ['Pfam_design', 'Rfam_design']
@@ -263,28 +393,39 @@ bio_benchmark_datasets = []
 base_path = './Bio-Benchmark/'
 
 dataset_paths = [
-    ('Drug-benchmark', 'Drug_design.json'),
-    ('Drug-benchmark', 'Drug-Drug_Interaction.json'),
-    ('Drug-benchmark', 'Drug-Target_Interaction.json'),
-    ('Protein-benchmark', 'Pfam_design.json'),
-    ('Protein-benchmark', 'Pfam_design_10shot.json'),
-    ('Protein-benchmark', 'Protein_function_prediction.json'),
-    ('Protein-benchmark', 'Protein_inverse_folding.json'),
-    ('Protein-benchmark', 'Protein_structure_prediction.json'),
-    ('RBP-benchmark', 'RNA-binding protein.json'),
-    ('RNA-benchmark', 'Rfam_design.json'),
-    ('RNA-benchmark', 'Rfam_design_10shot.json'),
-    ('RNA-benchmark', 'RNA_function_prediction.json'),
-    ('RNA-benchmark', 'RNA_inverse_folding.json'),
-    ('RNA-benchmark', 'RNA_structure_prediction.json'),
-    ('RNA-benchmark', 'sgRNA_efficiency_prediction.json'),
-    ('transformed_ehr', 'transformed_agentclinic.json'),
-    ('transformed_ehr', 'transformed_cmb_clin.json'),
-    ('transformed_ehr', 'transformed_imcs_mrg.json'),
-    ('transformed_tcmqa', 'transformed_cmb_exam.json'),
-    ('transformed_tcmqa', 'transformed_cmmlu_tcm.json'),
-    ('transformed_tcmqa', 'transformed_mlecqa_tcm.json'),
-    ('transformed_tcmqa', 'transformed_tcmsd.json'),
+    # ('Drug-benchmark', 'Drug_design.json'),
+    # ('Drug-benchmark', 'Drug-Drug_Interaction.json'),
+    # ('Drug-benchmark', 'Drug-Target_Interaction.json'),
+    # ('Protein-benchmark', 'Pfam_design.json'),
+    # ('Protein-benchmark', 'Pfam_design_10shot.json'),
+    # ('Protein-benchmark', 'Protein_function_prediction.json'),
+    # ('Protein-benchmark', 'Protein_inverse_folding.json'),
+    # ('Protein-benchmark', 'Protein_structure_prediction.json'),
+    # ('RBP-benchmark', 'RNA-binding protein.json'),
+    # ('RNA-benchmark', 'Rfam_design.json'),
+    # ('RNA-benchmark', 'Rfam_design_10shot.json'),
+    # ('RNA-benchmark', 'RNA_function_prediction.json'),
+    # ('RNA-benchmark', 'RNA_inverse_folding.json'),
+    # ('RNA-benchmark', 'RNA_structure_prediction.json'),
+    # ('RNA-benchmark', 'sgRNA_efficiency_prediction.json'),
+    # ('transformed_ehr', 'transformed_agentclinic.json'),
+    # ('transformed_ehr', 'transformed_cmb_clin.json'),
+    # ('transformed_ehr', 'transformed_imcs_mrg.json'),
+    # ('transformed_tcmqa', 'transformed_cmb_exam.json'),
+    # ('transformed_tcmqa', 'transformed_cmmlu_tcm.json'),
+    # ('transformed_tcmqa', 'transformed_mlecqa_tcm.json'),
+    # ('transformed_tcmqa', 'transformed_tcmsd.json'),
+
+    ('transformed_medicalqa', 'transformed_headqa.json'),
+    ('transformed_medicalqa', 'transformed_medlfqa_healthqa.json'),
+    ('transformed_medicalqa', 'transformed_medlfqa_kqa.json'),
+    ('transformed_medicalqa', 'transformed_medlfqa_liveqa.json'),
+    ('transformed_medicalqa', 'transformed_medlfqa_medicationqa.json'),
+    ('transformed_medicalqa', 'transformed_medmcqa.json'),
+    ('transformed_medicalqa', 'transformed_medqa_cn.json'),
+    ('transformed_medicalqa', 'transformed_medqa_tw.json'),
+    ('transformed_medicalqa', 'transformed_medqa_us.json'),
+    ('transformed_medicalqa', 'transformed_mmcu.json'),
 ]
 
 for folder, filename in dataset_paths:

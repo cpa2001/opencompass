@@ -7,8 +7,8 @@ models = [
         path='/mnt/hwfile/optimal/chenpengan/mistral-large-instruct-2407',
         max_seq_len=4096,
         max_out_len=2048,
-        batch_size=4,
-        run_cfg=dict(num_gpus=6),
+        batch_size=8,
+        run_cfg=dict(num_gpus=8),
         generation_kwargs=dict(
             do_sample=True,
             top_p=1,

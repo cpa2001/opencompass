@@ -73,14 +73,14 @@ gsm8k_cantonese_datasets = [
     dict(
         abbr='gsm8k_cantonese_0shot',
         type=GSM8KDataset,
-        path='/mnt/petrelfs/chenpengan/opencompass/cantonese_dataset/gsm8k_cantonese',
+        path='/cpfs01/user/chenpengan/root-2/opencompass/cantonese_dataset/gsm8k_cantonese',
         reader_cfg=gsm8k_reader_cfg,
         infer_cfg=gsm8k_infer_cfg_0shot,
         eval_cfg=gsm8k_eval_cfg_0shot),
     dict(
         abbr='gsm8k_cantonese_5shot',
         type=GSM8KDataset,
-        path='/mnt/petrelfs/chenpengan/opencompass/cantonese_dataset/gsm8k_cantonese',
+        path='/cpfs01/user/chenpengan/root-2/opencompass/cantonese_dataset/gsm8k_cantonese',
         reader_cfg=gsm8k_reader_cfg,
         infer_cfg=gsm8k_infer_cfg_5shot,
         eval_cfg=gsm8k_eval_cfg_5shot),        

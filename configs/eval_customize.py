@@ -25,6 +25,8 @@ with read_base():
     # from .models.customize.internlm2_5_20b import models as hf_internlm2_5_20b_model
     # from .models.customize.internlm2_5_20b_chat import models as hf_internlm2_5_20b_chat_model
     # from .models.customize.yi_1_5_34b_chat import models as hf_yi_1_5_34b_chat_model
+    # from .models.customize.internlm2_5_20b_chat_lmdeploy import models as lmdeploy_internlm2_5_20b_chat_model
+    # from .models.customize.internlm2_5_20b_lmdeploy import models as lmdeploy_internlm2_5_20b_model
 
     # 4GPU
     # from .models.customize.mistral_large_2_instruct import models as hf_mistral_large_2_instruct_model
@@ -73,7 +75,7 @@ with read_base():
 
     # 4GPU
     # from .models.customize.llama3_70b_instruct import models as hf_llama3_70b_instruct_model
-    from .models.customize.qwen2_5_72b_instruct import models as hf_qwen2_5_72b_instruct_model
+    # from .models.customize.qwen2_5_72b_instruct import models as hf_qwen2_5_72b_instruct_model
 
     # 6GPU
     # from .models.customize.mixtral8x22b_instruct import models as hf_mixtral8x22b_instruct_model
@@ -82,7 +84,8 @@ with read_base():
     
 work_dir = 'outputs/ARR-oct/'
 
-datasets = [*truthfulqa_cantonese_datasets, *gsm8k_cantonese_datasets, *ARC_c_cantonese_datasets, *cmmlu_yue_gen_datasets, *en_yue_datasets, *zh_yue_datasets]
+# datasets = [*truthfulqa_cantonese_datasets, *gsm8k_cantonese_datasets, *ARC_c_cantonese_datasets, *cmmlu_yue_gen_datasets, *en_yue_datasets, *zh_yue_datasets]
+# datasets = [*truthfulqa_english_datasets, *gsm8k_english_datasets, *ARC_c_english_datasets, *cmmlu_gen_datasets]
 # datasets = [*truthfulqa_cantonese_datasets]
 # datasets = [*truthfulqa_english_datasets]
 # datasets = [*truthfulqa_english_datasets, *truthfulqa_cantonese_datasets,*gsm8k_cantonese_datasets, *gsm8k_english_datasets]
@@ -99,7 +102,7 @@ datasets = [*truthfulqa_cantonese_datasets, *gsm8k_cantonese_datasets, *ARC_c_ca
 # datasets = [*cmmlu_yue_gen_datasets]
 # datasets = [*en_yue_datasets]
 # datasets = [*zh_yue_datasets]
-# datasets = [*en_yue_datasets, *zh_yue_datasets]
+datasets = [*en_yue_datasets, *zh_yue_datasets]
 # datasets = [*clean_yue_dataset]
 # datasets = [*gsm8k_chinese_datasets]
 # datasets = [*wmt19_datasets]

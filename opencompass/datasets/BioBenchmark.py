@@ -25,6 +25,11 @@ class BioBenchmarkDataset(BaseDataset):
         else:
             raise ValueError(f"Unsupported data format: {type(raw_data)}")
 
+        # Add free_form_answer if available
+        for item in data_list:
+            if 'answer' in item and isinstance(item['answer'], dict):
+                item['free_form_answer'] = item['answer'].get('free_form_answer', None)
+
         dataset['train'] = Dataset.from_list(data_list)
         dataset['test'] = Dataset.from_list(data_list)
         return dataset
