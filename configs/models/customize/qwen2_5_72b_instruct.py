@@ -7,8 +7,8 @@ models = [
         path='/cpfs01/shared/optimal/model/qwen2_5-72b-instruct',
         max_seq_len=4096,
         max_out_len=2048,
-        batch_size=8,
-        run_cfg=dict(num_gpus=6),
+        batch_size=256,
+        run_cfg=dict(num_gpus=4),
         generation_kwargs=dict(
             do_sample=True,
             top_p=1,

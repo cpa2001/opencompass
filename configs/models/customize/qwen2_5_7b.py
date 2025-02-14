@@ -4,10 +4,10 @@ models = [
     dict(
         type=HuggingFaceBaseModel,
         abbr='qwen2.5-7b-hf',
-        path='/mnt/hwfile/optimal/chenpengan/qwen2_5-7b',
+        path='/cpfs01/shared/optimal/model/qwen2_5-7b-instruct',
         max_out_len=1024,
-        batch_size=8,
-        run_cfg=dict(num_gpus=1),
+        batch_size=128,
+        run_cfg=dict(num_gpus=8),
         generation_kwargs=dict(
             do_sample=True,
             top_p=1,

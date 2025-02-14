@@ -8,7 +8,7 @@ models = [
         path='/cpfs01/shared/optimal/model/mistral-large-instruct-2407',
         model_kwargs=dict(tensor_parallel_size=8),
         max_out_len=1024,
-        batch_size=16,
+        batch_size=64,
         run_cfg=dict(num_gpus=8),
         generation_kwargs=dict(
             do_sample=True,

@@ -4,7 +4,7 @@ models = [
     dict(
         type=HuggingFaceBaseModel,
         abbr='internlm2_5-20b-optical-hf',
-        path='/cpfs01/user/chenpengan/root-2/xtuner/ppt_model/optical_internlm20b_453',
+        path='/cpfs01/user/chenpengan/root-2/xtuner/sft_model/hf-model-sft-optical-5epoch',
         max_seq_len=4096,
         max_out_len=1024,
         batch_size=16,

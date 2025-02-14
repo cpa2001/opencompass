@@ -27,9 +27,10 @@ with read_base():
 
     # 4GPU
     # from .models.customize.internlm2_5_20b import models as hf_internlm2_5_20b_model
-    # from .models.customize.internlm2_5_20b_optical import models as hf_internlm2_5_20b_optical_model
+    from .models.customize.internlm2_5_20b_optical_sft import models as hf_internlm2_5_20b_optical_sft_model
+    from .models.customize.internlm2_5_20b_optical import models as hf_internlm2_5_20b_optical_model
     # from .models.customize.qwen2_5_72b_instruct_vllm import models as vllm_qwen2_5_72b_instruct_model
-    from .models.customize.qwen2_5_72b_instruct_lmdeploy import models as lmdeploy_qwen2_5_72b_instruct_model
+    # from .models.customize.qwen2_5_72b_instruct_lmdeploy import models as lmdeploy_qwen2_5_72b_instruct_model
     # from .models.customize.qwen2_5_72b_instruct import models as hf_qwen2_5_72b_instruct_model
     # 6GPU
     # from .models.customize.llama3_70b_instruct import models as hf_llama3_70b_instruct_model

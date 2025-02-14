@@ -1,7 +1,9 @@
+# gsm8k.py
 import json
 import os
 import re
 from os import environ
+from typing import Optional
 
 from datasets import Dataset, DatasetDict
 
@@ -11,6 +13,12 @@ from opencompass.utils import get_data_path
 
 from .base import BaseDataset
 
+LANGUAGE_MAPPING = {
+    'cs': 'Czech',
+    'gu': 'Gujarati',
+    'en': 'English',
+    'yue': 'Cantonese',
+}
 
 @LOAD_DATASET.register_module()
 class GSM8KDataset(BaseDataset):
@@ -18,27 +26,42 @@ class GSM8KDataset(BaseDataset):
     @staticmethod
     def load(path):
         path = get_data_path(path)
-        if environ.get('DATASET_SOURCE') == 'ModelScope':
-            from modelscope import MsDataset
-            dataset = MsDataset.load(dataset_name=path)
-        else:
-            datasets = {}
-            for split in ['train', 'test']:
-                split_path = os.path.join(path, split + '.jsonl')
+        datasets = {}
+        for split in ['train', 'test']:
+            split_path = os.path.join(path, split + '.jsonl')
+            if os.path.exists(split_path):
                 dataset = []
                 with open(split_path, 'r', encoding='utf-8') as f:
                     for line in f:
                         line = json.loads(line.strip())
                         dataset.append(line)
                 datasets[split] = Dataset.from_list(dataset)
-            dataset = DatasetDict(datasets)
+        dataset = DatasetDict(datasets)
         return dataset
 
+@LOAD_DATASET.register_module()
+class MultilingualGSM8KDataset(BaseDataset):
+    
+    @staticmethod
+    def load(path: str, language: Optional[str] = 'en'):
+        path = get_data_path(path)
+        datasets = {}
+        for split in ['train', 'test']:
+            filename = f'gsm8k_{split}_{language}.jsonl'
+            split_path = os.path.join(path, filename)
+            if os.path.exists(split_path):
+                dataset = []
+                with open(split_path, 'r', encoding='utf-8') as f:
+                    for line in f:
+                        line = json.loads(line.strip())
+                        dataset.append(line)
+                datasets[split] = Dataset.from_list(dataset)
+        dataset = DatasetDict(datasets)
+        return dataset
 
 @TEXT_POSTPROCESSORS.register_module('gsm8k_dataset')
 def gsm8k_dataset_postprocess(text: str) -> str:
-    return text.split('#### ')[1].replace(',', '')
-
+    return text.split('#### ')[-1].replace(',', '').strip()
 
 @TEXT_POSTPROCESSORS.register_module('gsm8k')
 def gsm8k_postprocess(text: str) -> str:
@@ -48,12 +71,11 @@ def gsm8k_postprocess(text: str) -> str:
         return 'NULL'
     return numbers[-1]
 
-
 class Gsm8kEvaluator(BaseEvaluator):
 
     def is_equal(self, pred, refer):
         try:
-            if pred == refer or abs(float(pred) - int(refer)) < 1e-6:
+            if pred == refer or abs(float(pred) - float(refer)) < 1e-6:
                 return True
         except Exception:
             pass
@@ -62,21 +84,21 @@ class Gsm8kEvaluator(BaseEvaluator):
     def score(self, predictions, references):
         if len(predictions) != len(references):
             return {
-                'error': 'predictions and references have different '
-                'length'
+                'error': 'predictions and references have different length'
             }
         correct = 0
         count = 0
         details = []
-        for i, j in zip(predictions, references):
-            detail = {'pred': i, 'answer': j, 'correct': False}
+        for pred, refer in zip(predictions, references):
+            detail = {'pred': pred, 'answer': refer, 'correct': False}
             count += 1
-            if self.is_equal(i, j):
+            if self.is_equal(pred, refer):
                 correct += 1
                 detail['correct'] = True
             details.append(detail)
         result = {'accuracy': 100 * correct / count, 'details': details}
         return result
+
 
 
 class Gsm8kAgentEvaluator(BaseEvaluator):

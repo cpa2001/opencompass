@@ -16,6 +16,14 @@ bio_infer_cfg_0shot = dict(
     retriever=dict(type=ZeroRetriever),
     inferencer=dict(type=GenInferencer),
 )
+# bio_infer_cfg_0shot = dict(
+#     prompt_template=dict(
+#         type=PromptTemplate,
+#         template="你是{category}领域的顶尖专家。请仔细分析以下问题，并提供一个逐步的解决方案。\n\n问题：{question}\n\n请按照以下结构组织你的回答：\n\n分析：\n1. [你推理过程中的第一个关键点或步骤]\n2. [第二个关键点或步骤]\n3. [第三个关键点或步骤]\n(如有必要，可以添加更多步骤)\n\n最终答案：[基于上述分析得出的简洁准确的答案]\n\n请确保你的分析全面透彻，最终答案精确并直接回应问题。"
+#     ),
+#     retriever=dict(type=ZeroRetriever),
+#     inferencer=dict(type=GenInferencer),
+# )
 
 bio_infer_cfgs_5shot = {
     'Drug_design': dict(
@@ -174,79 +182,160 @@ bio_infer_cfgs_5shot = {
         retriever=dict(type=BM25Retriever, ice_num=5),
         inferencer=dict(type=GenInferencer),
     ),
+    # 'transformed_cmb_clin': dict(
+    #     ice_template=dict(
+    #         type=PromptTemplate,
+    #         template='Example:\nCase: {question}\nAnswer: {answer}\n'
+    #     ),
+    #     prompt_template=dict(
+    #         type=PromptTemplate,
+    #         template="You are a medical expert. Read the following patient information and answer the questions.\n\n</E>\n\nQuestion: {question}\n\nProvide detailed answers.",
+    #         ice_token='</E>',
+    #     ),
+    #     retriever=dict(type=BM25Retriever, ice_num=5),
+    #     inferencer=dict(type=GenInferencer),
+    # ),
     'transformed_cmb_clin': dict(
         ice_template=dict(
             type=PromptTemplate,
-            template='Example:\nCase: {question}\nAnswer: {answer}\n'
+            template='参考样例：\n病例：{question}\n答案：{answer}\n'
         ),
         prompt_template=dict(
             type=PromptTemplate,
-            template="You are a medical expert. Read the following patient information and answer the questions.\n\n</E>\n\nQuestion: {question}\n\nProvide detailed answers.",
+            template="你是一个医学专家。请你阅读病人的病例并回答相应问题。\n\n</E>\n\n病人的病例信息：{question}\n\n请提供详细的解释。",
             ice_token='</E>',
         ),
         retriever=dict(type=BM25Retriever, ice_num=5),
         inferencer=dict(type=GenInferencer),
     ),
+    # 'transformed_imcs_mrg': dict(
+    #     ice_template=dict(
+    #         type=PromptTemplate,
+    #         template='Example:\nPatient Description and Conversation: {question}\nDiagnostic Report: {answer}\n'
+    #     ),
+    #     prompt_template=dict(
+    #         type=PromptTemplate,
+    #         template="You are a medical expert. Based on the following patient description and doctor-patient conversation, generate a diagnostic report.\n\n</E>\n\nQuestion: {question}\n\nProvide the diagnostic report in the following format:\n\n{Provide the report format as per the data}",
+    #         ice_token='</E>',
+    #     ),
+    #     retriever=dict(type=ZeroRetriever),
+    #     inferencer=dict(type=GenInferencer),
+    # ),
     'transformed_imcs_mrg': dict(
         ice_template=dict(
             type=PromptTemplate,
-            template='Example:\nPatient Description and Conversation: {question}\nDiagnostic Report: {answer}\n'
+            template='示例：\n患者自述和医患对话：{question}\n诊疗报告：{answer}\n'
         ),
         prompt_template=dict(
             type=PromptTemplate,
-            template="You are a medical expert. Based on the following patient description and doctor-patient conversation, generate a diagnostic report.\n\n</E>\n\nQuestion: {question}\n\nProvide the diagnostic report in the following format:\n\n{Provide the report format as per the data}",
+            template="您是一位医学专家。根据以下患者自述和医患对话内容，生成对应的诊疗报告。\n\n</E>\n\n问题：{question}\n\n请按照以下格式提供诊疗报告：\n\n{提供报告格式}",
             ice_token='</E>',
         ),
         retriever=dict(type=ZeroRetriever),
         inferencer=dict(type=GenInferencer),
     ),
+    # 'transformed_cmb_exam': dict(
+    #     ice_template=dict(
+    #         type=PromptTemplate,
+    #         template='Example:\nMedical question: {question}\nCorrect answer: {answer}\n'# Need to be modified here
+    #     ),
+    #     prompt_template=dict(
+    #         type=PromptTemplate,
+    #         template="Answer the following multiple-choice question.\n\n</E>\n\nQuestion: {question}\n\nProvide the correct option.",
+    #         ice_token='</E>',
+    #     ),
+    #     retriever=dict(type=BM25Retriever, ice_num=5),
+    #     inferencer=dict(type=GenInferencer),
+    # ),
+    # 'transformed_cmmlu_tcm': dict(
+    #     ice_template=dict(
+    #         type=PromptTemplate,
+    #         template='Example:\nMedical question: {question}\nCorrect answer: {answer}\n'# Need to be modified here
+    #     ),
+    #     prompt_template=dict(
+    #         type=PromptTemplate,
+    #         template="Answer the following multiple-choice question related to Traditional Chinese Medicine.\n\n</E>\n\nQuestion: {question}\n\nProvide the correct option.",
+    #         ice_token='</E>',
+    #     ),
+    #     retriever=dict(type=BM25Retriever, ice_num=5),
+    #     inferencer=dict(type=GenInferencer),
+    # ),
+    # 'transformed_mlecqa_tcm': dict(
+    #     ice_template=dict(
+    #         type=PromptTemplate,
+    #         template='Example:\nMedical question: {question}\nCorrect answer: {answer}\n'# Need to be modified here
+    #     ),
+    #     prompt_template=dict(
+    #         type=PromptTemplate,
+    #         template="Answer the following multiple-choice question.\n\n</E>\n\n{question}\n\nProvide the correct option.",
+    #         ice_token='</E>',
+    #     ),
+    #     retriever=dict(type=BM25Retriever, ice_num=5),
+    #     inferencer=dict(type=GenInferencer),
+    # ),
+    # 'transformed_tcmsd': dict(
+    #     ice_template=dict(
+    #         type=PromptTemplate,
+    #         template='Example:\nMedical question: {question}\nCorrect answer: {answer}\n'# Need to be modified here
+    #     ),
+    #     prompt_template=dict(
+    #         type=PromptTemplate,
+    #         template="Using Traditional Chinese Medicine diagnostics, determine the patient's disease and syndrome based on the following information.\n\n</E>\n\nQuestion: {question}\n\nProvide your answer in the following format:\n\nDisease: \nSyndrome: ",
+    #         ice_token='</E>',
+    #     ),
+    #     retriever=dict(type=BM25Retriever, ice_num=5),
+    #     inferencer=dict(type=GenInferencer),
+    # ),
     'transformed_cmb_exam': dict(
         ice_template=dict(
             type=PromptTemplate,
-            template='Example:\nMedical question: {question}\nCorrect answer: {answer}\n'# Need to be modified here
+            template='示例：\n医学问题：{question}\n正确答案：{answer}\n'  # 需在此处进行修改
         ),
         prompt_template=dict(
             type=PromptTemplate,
-            template="Answer the following multiple-choice question.\n\n</E>\n\nQuestion: {question}\n\nProvide the correct option.",
+            template="请回答以下选择题。\n\n</E>\n\n问题：{question}\n\n提供正确的选项。",
             ice_token='</E>',
         ),
         retriever=dict(type=BM25Retriever, ice_num=5),
         inferencer=dict(type=GenInferencer),
     ),
+
     'transformed_cmmlu_tcm': dict(
         ice_template=dict(
             type=PromptTemplate,
-            template='Example:\nMedical question: {question}\nCorrect answer: {answer}\n'# Need to be modified here
+            template='示例：\n医学问题：{question}\n正确答案：{answer}\n'  # 需在此处进行修改
         ),
         prompt_template=dict(
             type=PromptTemplate,
-            template="Answer the following multiple-choice question related to Traditional Chinese Medicine.\n\n</E>\n\nQuestion: {question}\n\nProvide the correct option.",
+            template="请回答以下关于中医的选择题。\n\n</E>\n\n问题：{question}\n\n提供正确的选项。",
             ice_token='</E>',
         ),
         retriever=dict(type=BM25Retriever, ice_num=5),
         inferencer=dict(type=GenInferencer),
     ),
+
     'transformed_mlecqa_tcm': dict(
         ice_template=dict(
             type=PromptTemplate,
-            template='Example:\nMedical question: {question}\nCorrect answer: {answer}\n'# Need to be modified here
+            template='示例：\n医学问题：{question}\n正确答案：{answer}\n'  # 需在此处进行修改
         ),
         prompt_template=dict(
             type=PromptTemplate,
-            template="Answer the following multiple-choice question.\n\n</E>\n\n{question}\n\nProvide the correct option.",
+            template="请回答以下选择题。\n\n</E>\n\n{question}\n\n提供正确的选项。",
             ice_token='</E>',
         ),
         retriever=dict(type=BM25Retriever, ice_num=5),
         inferencer=dict(type=GenInferencer),
     ),
+
     'transformed_tcmsd': dict(
         ice_template=dict(
             type=PromptTemplate,
-            template='Example:\nMedical question: {question}\nCorrect answer: {answer}\n'# Need to be modified here
+            template='示例：\n医学问题：{question}\n正确答案：{answer}\n'  # 需在此处进行修改
         ),
         prompt_template=dict(
             type=PromptTemplate,
-            template="Using Traditional Chinese Medicine diagnostics, determine the patient's disease and syndrome based on the following information.\n\n</E>\n\nQuestion: {question}\n\nProvide your answer in the following format:\n\nDisease: \nSyndrome: ",
+            template="使用中医诊断，根据以下信息判断患者的疾病和证候。\n\n</E>\n\n问题：{question}\n\n请按照以下格式提供您的答案：\n\n疾病：\n证候：",
             ice_token='</E>',
         ),
         retriever=dict(type=BM25Retriever, ice_num=5),
@@ -330,27 +419,54 @@ bio_infer_cfgs_5shot = {
         retriever=dict(type=BM25Retriever, ice_num=5),
         inferencer=dict(type=GenInferencer),
     ),
+    # 'transformed_medqa_cn': dict(
+    #     ice_template=dict(
+    #         type=PromptTemplate,
+    #         template='Example:\nMedical Question (CN): {question}\nCorrect Answer: {answer}\n'
+    #     ),
+    #     prompt_template=dict(
+    #         type=PromptTemplate,
+    #         template="You are a leading expert in Chinese medical sciences. Carefully analyze the following multiple-choice question and provide the correct answer along with your reasoning.\n\n</E>\nMedical Question (CN): {question}\n\nYour response should be structured as follows:\n\nAnalysis:\n1. [First key point or step in your reasoning]\n2. [Second key point or step]\n3. [Third key point or step]\n(Add more steps if necessary)\n\nFinal answer: [Your concise and accurate answer based on the analysis above]\n\nEnsure your analysis is thorough and your final answer is precise and directly addresses the question.",
+    #         ice_token='</E>',
+    #     ),
+    #     retriever=dict(type=BM25Retriever, ice_num=5),
+    #     inferencer=dict(type=GenInferencer),
+    # ),
+    # 'transformed_medqa_tw': dict(
+    #     ice_template=dict(
+    #         type=PromptTemplate,
+    #         template='Example:\nMedical Question (TW): {question}\nCorrect Answer: {answer}\n'
+    #     ),
+    #     prompt_template=dict(
+    #         type=PromptTemplate,
+    #         template="You are a leading expert in Taiwanese medical sciences. Carefully analyze the following multiple-choice question and provide the correct answer along with your reasoning.\n\n</E>\nMedical Question (TW): {question}\n\nYour response should be structured as follows:\n\nAnalysis:\n1. [First key point or step in your reasoning]\n2. [Second key point or step]\n3. [Third key point or step]\n(Add more steps if necessary)\n\nFinal answer: [Your concise and accurate answer based on the analysis above]\n\nEnsure your analysis is thorough and your final answer is precise and directly addresses the question.",
+    #         ice_token='</E>',
+    #     ),
+    #     retriever=dict(type=BM25Retriever, ice_num=5),
+    #     inferencer=dict(type=GenInferencer),
+    # ),
     'transformed_medqa_cn': dict(
         ice_template=dict(
             type=PromptTemplate,
-            template='Example:\nMedical Question (CN): {question}\nCorrect Answer: {answer}\n'
+            template='示例：\n医学问题 (CN)：{question}\n正确答案：{answer}\n'
         ),
         prompt_template=dict(
             type=PromptTemplate,
-            template="You are a leading expert in Chinese medical sciences. Carefully analyze the following multiple-choice question and provide the correct answer along with your reasoning.\n\n</E>\nMedical Question (CN): {question}\n\nYour response should be structured as follows:\n\nAnalysis:\n1. [First key point or step in your reasoning]\n2. [Second key point or step]\n3. [Third key point or step]\n(Add more steps if necessary)\n\nFinal answer: [Your concise and accurate answer based on the analysis above]\n\nEnsure your analysis is thorough and your final answer is precise and directly addresses the question.",
+            template="您是一位中国医学领域的顶尖专家。请仔细分析以下选择题，并提供正确答案以及您的推理过程。\n\n</E>\n医学问题 (CN)：{question}\n\n您的回答结构如下：\n\n分析：\n1. [推理过程中的第一关键点或步骤]\n2. [第二关键点或步骤]\n3. [第三关键点或步骤]\n(如有需要，可添加更多步骤)\n\n最终答案：[基于上述分析的简洁准确答案]\n\n确保您的分析详尽无遗，最终答案精确且直接回应问题。",
             ice_token='</E>',
         ),
         retriever=dict(type=BM25Retriever, ice_num=5),
         inferencer=dict(type=GenInferencer),
     ),
+
     'transformed_medqa_tw': dict(
         ice_template=dict(
             type=PromptTemplate,
-            template='Example:\nMedical Question (TW): {question}\nCorrect Answer: {answer}\n'
+            template='示例：\n医学问题 (TW)：{question}\n正确答案：{answer}\n'
         ),
         prompt_template=dict(
             type=PromptTemplate,
-            template="You are a leading expert in Taiwanese medical sciences. Carefully analyze the following multiple-choice question and provide the correct answer along with your reasoning.\n\n</E>\nMedical Question (TW): {question}\n\nYour response should be structured as follows:\n\nAnalysis:\n1. [First key point or step in your reasoning]\n2. [Second key point or step]\n3. [Third key point or step]\n(Add more steps if necessary)\n\nFinal answer: [Your concise and accurate answer based on the analysis above]\n\nEnsure your analysis is thorough and your final answer is precise and directly addresses the question.",
+            template="您是一位台湾医学领域的顶尖专家。请仔细分析以下选择题，并提供正确答案以及您的推理过程。\n\n</E>\n医学问题 (TW)：{question}\n\n您的回答结构如下：\n\n分析：\n1. [推理过程中的第一关键点或步骤]\n2. [第二关键点或步骤]\n3. [第三关键点或步骤]\n(如有需要，可添加更多步骤)\n\n最终答案：[基于上述分析的简洁准确答案]\n\n确保您的分析详尽无遗，最终答案精确且直接回应问题。",
             ice_token='</E>',
         ),
         retriever=dict(type=BM25Retriever, ice_num=5),
@@ -369,18 +485,31 @@ bio_infer_cfgs_5shot = {
         retriever=dict(type=BM25Retriever, ice_num=5),
         inferencer=dict(type=GenInferencer),
     ),
+    # 'transformed_mmcu': dict(
+    #     ice_template=dict(
+    #         type=PromptTemplate,
+    #         template='Example:\nMMCU Medical Question: {question}\nCorrect Answer: {answer}\n'
+    #     ),
+    #     prompt_template=dict(
+    #         type=PromptTemplate,
+    #         template="You are a leading expert in fundamental medical sciences. Carefully analyze the following multiple-choice question and provide the correct answer along with your reasoning.\n\n</E>\nMMCU Medical Question: {question}\n\nYour response should be structured as follows:\n\nAnalysis:\n1. [First key point or step in your reasoning]\n2. [Second key point or step]\n3. [Third key point or step]\n(Add more steps if necessary)\n\nFinal answer: [Your concise and accurate answer based on the analysis above]\n\nEnsure your analysis is thorough and your final answer is precise and directly addresses the question.",
+    #         ice_token='</E>',
+    #     ),
+    #     retriever=dict(type=BM25Retriever, ice_num=5),
+    #     inferencer=dict(type=GenInferencer),
+    # ),
     'transformed_mmcu': dict(
-        ice_template=dict(
-            type=PromptTemplate,
-            template='Example:\nMMCU Medical Question: {question}\nCorrect Answer: {answer}\n'
-        ),
-        prompt_template=dict(
-            type=PromptTemplate,
-            template="You are a leading expert in fundamental medical sciences. Carefully analyze the following multiple-choice question and provide the correct answer along with your reasoning.\n\n</E>\nMMCU Medical Question: {question}\n\nYour response should be structured as follows:\n\nAnalysis:\n1. [First key point or step in your reasoning]\n2. [Second key point or step]\n3. [Third key point or step]\n(Add more steps if necessary)\n\nFinal answer: [Your concise and accurate answer based on the analysis above]\n\nEnsure your analysis is thorough and your final answer is precise and directly addresses the question.",
-            ice_token='</E>',
-        ),
-        retriever=dict(type=BM25Retriever, ice_num=5),
-        inferencer=dict(type=GenInferencer),
+    ice_template=dict(
+        type=PromptTemplate,
+        template='示例：\nMMCU 医学问题：{question}\n正确答案：{answer}\n'
+    ),
+    prompt_template=dict(
+        type=PromptTemplate,
+        template="您是一位基础医学领域的顶尖专家。请仔细分析以下选择题，并提供正确答案以及您的推理过程。\n\n</E>\nMMCU 医学问题：{question}\n\n您的回答结构如下：\n\n分析：\n1. [推理过程中的第一关键点或步骤]\n2. [第二关键点或步骤]\n3. [第三关键点或步骤]\n(如有需要，可添加更多步骤)\n\n最终答案：[基于上述分析的简洁准确答案]\n\n确保您的分析详尽无遗，最终答案精确且直接回应问题。",
+        ice_token='</E>',
+    ),
+    retriever=dict(type=BM25Retriever, ice_num=5),
+    inferencer=dict(type=GenInferencer),
     ),
 }
 
@@ -393,39 +522,45 @@ bio_benchmark_datasets = []
 base_path = './Bio-Benchmark/'
 
 dataset_paths = [
-    # ('Drug-benchmark', 'Drug_design.json'),
-    # ('Drug-benchmark', 'Drug-Drug_Interaction.json'),
-    # ('Drug-benchmark', 'Drug-Target_Interaction.json'),
-    # ('Protein-benchmark', 'Pfam_design.json'),
-    # ('Protein-benchmark', 'Pfam_design_10shot.json'),
-    # ('Protein-benchmark', 'Protein_function_prediction.json'),
-    # ('Protein-benchmark', 'Protein_inverse_folding.json'),
-    # ('Protein-benchmark', 'Protein_structure_prediction.json'),
-    # ('RBP-benchmark', 'RNA-binding protein.json'),
-    # ('RNA-benchmark', 'Rfam_design.json'),
-    # ('RNA-benchmark', 'Rfam_design_10shot.json'),
-    # ('RNA-benchmark', 'RNA_function_prediction.json'),
-    # ('RNA-benchmark', 'RNA_inverse_folding.json'),
-    # ('RNA-benchmark', 'RNA_structure_prediction.json'),
-    # ('RNA-benchmark', 'sgRNA_efficiency_prediction.json'),
+    ('Drug-benchmark', 'Drug_design.json'),
+    ('Drug-benchmark', 'Drug-Drug_Interaction.json'),
+    ('Drug-benchmark', 'Drug-Target_Interaction.json'),
+    
+    ('Protein-benchmark', 'Pfam_design.json'),
+    ('Protein-benchmark', 'Pfam_design_10shot.json'),
+    ('Protein-benchmark', 'Protein_function_prediction.json'),
+    ('Protein-benchmark', 'Protein_inverse_folding.json'),
+    ('Protein-benchmark', 'Protein_structure_prediction.json'),
+    
+    ('RBP-benchmark', 'RNA-binding protein.json'),
+
+    ('RNA-benchmark', 'Rfam_design.json'),
+    ('RNA-benchmark', 'Rfam_design_10shot.json'),
+    ('RNA-benchmark', 'RNA_function_prediction.json'),
+    ('RNA-benchmark', 'RNA_inverse_folding.json'),
+    ('RNA-benchmark', 'RNA_structure_prediction.json'),
+    ('RNA-benchmark', 'sgRNA_efficiency_prediction.json'),
+    
+    # sequence above
     # ('transformed_ehr', 'transformed_agentclinic.json'),
     # ('transformed_ehr', 'transformed_cmb_clin.json'),
     # ('transformed_ehr', 'transformed_imcs_mrg.json'),
+
     # ('transformed_tcmqa', 'transformed_cmb_exam.json'),
     # ('transformed_tcmqa', 'transformed_cmmlu_tcm.json'),
     # ('transformed_tcmqa', 'transformed_mlecqa_tcm.json'),
     # ('transformed_tcmqa', 'transformed_tcmsd.json'),
 
-    ('transformed_medicalqa', 'transformed_headqa.json'),
-    ('transformed_medicalqa', 'transformed_medlfqa_healthqa.json'),
-    ('transformed_medicalqa', 'transformed_medlfqa_kqa.json'),
-    ('transformed_medicalqa', 'transformed_medlfqa_liveqa.json'),
-    ('transformed_medicalqa', 'transformed_medlfqa_medicationqa.json'),
-    ('transformed_medicalqa', 'transformed_medmcqa.json'),
-    ('transformed_medicalqa', 'transformed_medqa_cn.json'),
-    ('transformed_medicalqa', 'transformed_medqa_tw.json'),
-    ('transformed_medicalqa', 'transformed_medqa_us.json'),
-    ('transformed_medicalqa', 'transformed_mmcu.json'),
+    # ('transformed_medicalqa', 'transformed_headqa.json'),
+    # ('transformed_medicalqa', 'transformed_medlfqa_healthqa.json'),
+    # ('transformed_medicalqa', 'transformed_medlfqa_kqa.json'),
+    # ('transformed_medicalqa', 'transformed_medlfqa_liveqa.json'),
+    # ('transformed_medicalqa', 'transformed_medlfqa_medicationqa.json'),
+    # ('transformed_medicalqa', 'transformed_medmcqa.json'),
+    # ('transformed_medicalqa', 'transformed_medqa_cn.json'),
+    # ('transformed_medicalqa', 'transformed_medqa_tw.json'),
+    # ('transformed_medicalqa', 'transformed_medqa_us.json'),
+    # ('transformed_medicalqa', 'transformed_mmcu.json'),
 ]
 
 for folder, filename in dataset_paths:
@@ -442,11 +577,11 @@ for folder, filename in dataset_paths:
         )
         # pass
     elif dataset_name.endswith('_10shot'):
-        base_name = dataset_name[:-7]  # Remove '_10shot' suffix
+        base_name = dataset_name
         if base_name in ten_shot_datasets:
             bio_benchmark_datasets.append(
                 dict(
-                    abbr=f'{base_name}_10shot',
+                    abbr=f'{base_name}',
                     type=BioBenchmarkDataset,
                     path=f'{base_path}{folder}/{filename}',
                     reader_cfg=bio_reader_cfg,

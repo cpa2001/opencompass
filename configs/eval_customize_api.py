@@ -12,6 +12,7 @@ with read_base():
     from .datasets.truthfulqa.truthfulqa_gen_english import truthfulqa_english_datasets
     from .datasets.gsm8k.gsm8k_gen_cantonese import gsm8k_cantonese_datasets
     from .datasets.gsm8k.gsm8k_gen_english import gsm8k_english_datasets
+    from .datasets.gsm8k.gsm8k_gen_multilingual import gsm8k_multilingual_datasets
     from .datasets.cmmlu.cmmlu_gen_test import cmmlu_gen_datasets
     from .datasets.cmmlu.cmmlu_yue_gen_csv import cmmlu_yue_gen_datasets
     from .datasets.ARC_c.ARC_c_gen_cantonese import ARC_c_cantonese_datasets
@@ -20,11 +21,12 @@ with read_base():
     from .datasets.wmt19.wmt19_gen import wmt19_datasets
     
 
-work_dir = 'outputs/wmt19/'
+work_dir = 'outputs/multilingual/'
 # datasets = [*ARC_c_cantonese_datasets]
 # datasets = [*en_yue_datasets, *zh_yue_datasets]
 # datasets = [*cmmlu_yue_gen_datasets]
-datasets = [*wmt19_datasets]
+# datasets = [*wmt19_datasets]
+datasets = [*gsm8k_multilingual_datasets]
 # # GPT4 needs a special humaneval postprocessor
 # for _dataset in datasets:
 #     if _dataset['path'] == 'openai_humaneval':
@@ -96,7 +98,8 @@ GPT4o = [
 ]
 
 # models=[*GPT4o,*GPT4,*GPT3_5]
-models = [*GPT4o,*GPT4]
+# models = [*GPT4o,*GPT4]
+models = [*GPT4o]
 # models = [*GPT3_5]
 
 # infer = dict(
